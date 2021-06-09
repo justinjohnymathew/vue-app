@@ -1,7 +1,7 @@
 <template>
 <div class="h-screen dark:bg-gray-800">
   <Navbar/>
-   <div class="  pl-1 pr-1 pt-8 dark:bg-gray-800 ">
+   <div class="  pl-1 pr-1 pt-8 dark:bg-gray-800">
      <!-- All Pages are nested inside this division ? -->
   <router-view/>
   </div>
