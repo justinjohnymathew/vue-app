@@ -5,17 +5,21 @@
             <h2 class="text-3xl font-bold text-center text-gray-700 dark:text-white">Hey</h2>
 
             <p class="mt-1 text-center text-gray-500 dark:text-gray-400">Create an account</p>
+            <p   v-show = "error" class= " text-red-400 mt-1 text-center  dark:text-red-400">{{ error }}</p>
 
             <form @submit.prevent="register">
               <div class="w-full mt-4">
-                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 dark:text-white  placeholder-gray-500 dark:placeholder-white dark:placeholder-white bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" v-model = "firstname" type="text" placeholder="First Name" aria-label="firstname">
+                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 dark:text-white  placeholder-gray-500 dark:placeholder-white dark:placeholder-white bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" v-model = "firstname" type="text" placeholder="First Name" aria-label="firstname" required>
                 </div>
                 <div class="w-full mt-4">
-                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 dark:text-white placeholder-gray-500 dark:placeholder-white dark:placeholder-white bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" v-model = "username" type="text" placeholder="Username" aria-label="Username">
+                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 dark:text-white  placeholder-gray-500 dark:placeholder-white dark:placeholder-white bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" v-model = "lastname" type="text" placeholder="Last Name" aria-label="lastname">
+                </div>
+                <div class="w-full mt-4">
+                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 dark:text-white placeholder-gray-500 dark:placeholder-white dark:placeholder-white bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" v-model = "username" type="text" placeholder="Username" aria-label="Username" required>
                 </div>
 
                 <div class="w-full mt-4">
-                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 dark:text-white placeholder-gray-500 dark:placeholder-white dark:placeholder-white bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" v-model="password" type="password" placeholder="Password" aria-label="Password">
+                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 dark:text-white placeholder-gray-500 dark:placeholder-white dark:placeholder-white bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" v-model="password" type="password" placeholder="Password" aria-label="Password" required>
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
@@ -41,6 +45,7 @@ export default {
   data () {
     return {
       firstname: '',
+      lastname: '',
       username: '',
       password: ''
     }
@@ -49,13 +54,14 @@ export default {
     register () {
       const data = {
         firstname: this.firstname,
+        lastname: this.lastname,
         username: this.username,
         password: this.password
       }
       console.log(data.username, data.password)
       this.$store.dispatch('register', data)
         .then(() => this.$router.push('/dashboard'))
-        .catch(err => console.log(err.message))
+        .catch(err => { this.error = err.message })
     }
   }
 }
