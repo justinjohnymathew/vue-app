@@ -1,5 +1,5 @@
 <template>
-     <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 border-2 border-grey-800 dark:border-white">
+     <div class="w-full  max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 border-2 border-grey-800 dark:border-white">
         <div class="px-6 py-4">
             <h2 class="text-3xl font-bold text-center text-gray-700 dark:text-white">Hey</h2>
 
@@ -15,7 +15,6 @@
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
-                    <!-- <a href="#" class="text-sm text-gray-600 dark:text-gray-200 hover:text-gray-500">Forget Password?</a> -->
 
                     <button class="px-4 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none" type="submit">
                         Login
