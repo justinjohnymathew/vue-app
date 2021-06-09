@@ -1,30 +1,46 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+<div class="h-screen dark:bg-gray-800">
+  <Navbar/>
+   <div class="  pl-1 pr-1 pt-8 dark:bg-gray-800 ">
+     <!-- All Pages are nested inside this division ? -->
   <router-view/>
+  </div>
+  <!-- togggle button for switching theme -->
+  <button @click="toggleTheme"
+     class=" p-1 dark:text-red-400 text-cyan-200 fixed bottom-3 right-3 border-2 border-gray-800 dark:border-2 dark:border-white">
+      <span class=" text-xl text-gray-800 " v-if="theme=='light'">🌣</span>
+      <span class=" text-xl text-white" v-else>☾</span>
+    </button>
+    </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapGetters } from 'vuex' // to access geetrs for store
+import Navbar from '@/components/Nav/Navbar.vue' // for navbar component
 
-#nav {
-  padding: 30px;
+export default {
+  beforeMount () { // function to be executed before mounting page
+    this.$store.dispatch('initTheme')// initializes theme
+  },
+  name: 'App',
+  components: {
+    Navbar
+  },
+  computed: {
+    ...mapGetters({ theme: 'getTheme' })// returns current theme
+  },
+  watch: { // gets executed on change of a state
+    theme (newTheme) {
+      newTheme === 'light'
+        ? document.querySelector('html').classList.remove('dark')
+        : document.querySelector('html').classList.add('dark')
+    }
+  },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  methods: {
+    toggleTheme () { // method executed on theme toggle button click
+      this.$store.dispatch('toggleTheme')
     }
   }
 }
-</style>
+</script>
